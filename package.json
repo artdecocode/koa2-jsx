@@ -5,7 +5,8 @@
   "main": "src/index.js",
   "scripts": {
     "test": "zoroaster test/spec",
-    "test-watch": "zoroaster test/spec --watch"
+    "test-watch": "zoroaster test/spec --watch",
+    "lint": "eslint ."
   },
   "repository": {
     "type": "git",
@@ -29,6 +30,15 @@
   },
   "homepage": "https://github.com/Sobesednik/koa2-jsx#readme",
   "devDependencies": {
+    "bestie": "^1.0.0",
+    "eslint-plugin-react": "^7.7.0",
     "zoroaster": "0.5.3"
+  },
+  "dependencies": {
+    "eslint": "^4.18.2",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-redux": "^5.0.7",
+    "redux": "^3.7.2"
   }
 }

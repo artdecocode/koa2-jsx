@@ -3,7 +3,10 @@ module.exports = {
         "es6": true,
         "node": true
     },
-    "extends": "eslint:recommended",
+    "extends": [
+        "eslint:recommended",
+        "plugin:react/recommended"
+    ],
     "parserOptions": {
         "ecmaVersion": 2017,
         "sourceType": "module"
@@ -11,7 +14,7 @@ module.exports = {
     "rules": {
         "indent": [
             "error",
-            4
+            2
         ],
         "linebreak-style": [
             "error",
