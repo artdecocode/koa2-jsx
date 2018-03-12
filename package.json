@@ -11,7 +11,17 @@
     "type": "git",
     "url": "git://github.com/Sobesednik/koa2-jsx.git"
   },
-  "keywords": ["koa2-jsx"],
+  "keywords": [
+    "koa2",
+    "jsx",
+    "view",
+    "template",
+    "react",
+    "redux",
+    "server",
+    "backend",
+    "universal"
+  ],
   "author": "Anton <anton@sobes.io>",
   "license": "MIT",
   "bugs": {
