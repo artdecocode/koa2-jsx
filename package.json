@@ -2,11 +2,14 @@
   "name": "koa2-jsx",
   "version": "1.0.0",
   "description": "A Koa2 middleware to render JSX templates with Redux support",
-  "main": "src/index.js",
+  "main": "build",
   "scripts": {
     "test": "zoroaster test/spec",
     "test-watch": "zoroaster test/spec --watch",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "build": "babel src --out-dir build",
+    "built": "babel test --out-dir test-build",
+    "example": "node example/require"
   },
   "repository": {
     "type": "git",
@@ -30,8 +33,16 @@
   },
   "homepage": "https://github.com/Sobesednik/koa2-jsx#readme",
   "devDependencies": {
-    "bestie": "^1.0.0",
+    "@babel/cli": "^7.0.0-beta.40",
+    "@babel/core": "^7.0.0-beta.40",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0-beta.40",
+    "@babel/plugin-transform-modules-commonjs": "^7.0.0-beta.40",
+    "@babel/preset-react": "^7.0.0-beta.40",
+    "@babel/register": "^7.0.0-beta.40",
+    "babel-plugin-react-require": "^3.0.0",
     "eslint-plugin-react": "^7.7.0",
+    "koa2": "^2.0.0-alpha.7",
+    "source-map-support": "^0.5.3",
     "zoroaster": "0.5.3"
   },
   "dependencies": {
