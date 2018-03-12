@@ -1,0 +1,24 @@
+{
+  "name": "koa2-jsx",
+  "version": "1.0.0",
+  "description": "A Koa2 middleware to render JSX templates with Redux support",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "zoroaster test/spec",
+    "test-watch": "zoroaster test/spec --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Sobesednik/koa2-jsx.git"
+  },
+  "keywords": ["koa2-jsx"],
+  "author": "Anton <anton@sobes.io>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Sobesednik/koa2-jsx/issues"
+  },
+  "homepage": "https://github.com/Sobesednik/koa2-jsx#readme",
+  "devDependencies": {
+    "zoroaster": "0.5.3"
+  }
+}
