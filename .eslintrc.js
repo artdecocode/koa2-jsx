@@ -8,7 +8,7 @@ module.exports = {
         "plugin:react/recommended"
     ],
     "parserOptions": {
-        "ecmaVersion": 2017,
+        "ecmaVersion": 2018,
         "sourceType": "module"
     },
     "rules": {
@@ -39,6 +39,8 @@ module.exports = {
         "padded-blocks": [
             "error",
             "never"
-        ]
+        ],
+        "react/react-in-jsx-scope": "off",
+        "react/prop-types": "off"
     }
 };

@@ -1,8 +1,8 @@
-const { equal, assert } = require('zoroaster/assert')
-const context = require('../context')
-const koa2Jsx = require('../..')
+import { equal, assert } from 'zoroaster/assert'
+import context from '../context'
+import koa2Jsx from '../..'
 
-const koa2JsxTestSuite = {
+export default {
   context,
   'should be a function'() {
     equal(typeof koa2Jsx, 'function')
@@ -13,5 +13,3 @@ const koa2JsxTestSuite = {
     })
   },
 }
-
-module.exports = koa2JsxTestSuite
