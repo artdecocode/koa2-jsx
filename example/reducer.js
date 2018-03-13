@@ -18,9 +18,9 @@ const scriptSources = (state = [], { type, src, sources }) => {
       return state
   }
 }
-const links = (state = [], { type, props }) => {
-  if (type !== 'ADD_LINK') return state
-  return [...state, props]
+const links = (state = [], { type, css }) => {
+  if (type !== 'ADD_CSS') return state
+  return [...state, ...css]
 }
 
 export default combineReducers({

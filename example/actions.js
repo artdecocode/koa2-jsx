@@ -1,7 +1,7 @@
-const mapScripts = ([src, integrity, origin ]) => ({
+const mapScripts = ([src, integrity, origin]) => ({
   src, integrity, origin,
 })
-const mapCss = ([href, integrity, origin ]) => ({
+const mapCss = ([href, integrity, origin]) => ({
   href, integrity, origin, rel: 'stylesheet',
 })
 
@@ -15,7 +15,7 @@ const actions = {
 
   addCss: css => ({
     type: 'ADD_CSS',
-    css: typeof css === 'string' ? mapCss([css]) : css.map(mapCss),
+    css: typeof css === 'string' ? [mapCss([css])] : css.map(mapCss),
   }),
 
   addJs: js => ({ type: 'ADD_JS', js: js.trim() }),
