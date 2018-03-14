@@ -1,10 +1,11 @@
 import Koa from 'koa'
-import View from './Containers/View'
-import actions from './actions'
-import reducer from './reducer'
-import jsx, { prettyRender } from '../src'
+import { actions, reducer, View } from '../src/wireframe'
+import bootstrap from '../src/bootstrap'
+import koa2Jsx, { prettyRender } from '../src'
+import serve from 'koa-static'
+import { resolve } from 'path'
 
-const Store = jsx({
+const jsx = koa2Jsx({
   actions,
   reducer,
   View,
@@ -14,63 +15,71 @@ const Store = jsx({
 
 const app = new Koa()
 
+app.use(serve(resolve(__dirname, 'static')))
+
+app.use(jsx)
+app.use(bootstrap)
+
 /**
- * Install middleware
+ * @type {Koa.Middleware}
  */
-app.use(Store)
-app.use(async (ctx, next) => {
+const page = async (ctx, next) => {
   ctx.setTitle('Welcome to the koa2-jsx world')
 
-  ctx.addCss('https://fonts.googleapis.com/css?family=Dancing+Script:700')
+  ctx.addCss('https://fonts.googleapis.com/css?family=Roboto:700&effect=anaglyph|3d-float')
+  ctx.addStyle('h1 { font-family: \'Roboto\', sans-serif; }')
 
-  ctx.addCss([
+  ctx.addManifest('/manifest.json')
+  ctx.addIcon([
     [
-      'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css',
-      ...(process.env.NODE_ENV === 'production' ? [
-        'sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm',
-        'anonymous',
-      ] : []),
+      '/icons/favicon-16x16.png',
+      'image/png',
+      '16x16',
+    ],
+    [
+      '/icons/favicon-32x32.png',
+      'image/png',
+      '32x32',
+    ],
+    [
+      '/icons/favicon-96x96.png',
+      'image/png',
+      '96x96',
+    ],
+    [
+      '/icons/apple-icon-180x180.png',
+      'image/png',
+      '180x180',
+      'apple-touch-icon',
+    ],
+    [
+      '/icons/android-icon-192x192.png',
+      'image/png',
+      '192x192',
     ],
   ])
 
-  ctx.addScript([
-    [
-      'https://code.jquery.com/jquery-3.2.1.slim.min.js',
-      ...(process.env.NODE_ENV === 'production' ? [
-        'sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN',
-        'anonymous',
-      ] : []),
-    ],
-    [
-      'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js',
-      ...(process.env.NODE_ENV === 'production' ? [
-        'sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q',
-        'anonymous',
-      ] : []),
-    ],
-    [
-      'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js',
-      ...(process.env.NODE_ENV === 'production' ? [
-        'sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl',
-        'anonymous',
-      ] : []),
-    ],
-  ])
-
-  ctx.addJs('$(".alert").alert()')
   await next()
-})
+}
+
+app.use(page)
 app.use(async (ctx, next) => {
   if (ctx.path != '/') return
-  ctx.Content = <div>
-    <h1> Hello from body </h1>
-    <div className="alert alert-warning alert-dismissible fade show" role="alert">
-      <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+
+  ctx.Content = <div className="container">
+    <h1 className="font-effect-anaglyph"> Hello from body </h1>
+    <div className="alert alert-success alert-dismissible fade show" role="alert">
+      <strong>Well done!</strong> You&apos;ve successfully started an example
+      of <code>koa2-jsx</code> which renders a Bootstrap page with this alert. You can
+      close it with the button on the right.
       <button type="button" className="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
   </div>
+
+  ctx.addJs('$(".alert").alert()')
+
   await next()
 })
 

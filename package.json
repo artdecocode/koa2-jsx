@@ -43,14 +43,15 @@
     "eslint": "^4.18.2",
     "eslint-plugin-react": "^7.7.0",
     "koa": "^2.5.0",
+    "koa-static": "^4.0.2",
     "source-map-support": "^0.5.3",
     "zoroaster": "0.5.3"
   },
   "dependencies": {
-    "html": "^1.0.0",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
-    "react-redux": "^5.0.7",
-    "redux": "^3.7.2"
+    "html": "1.0.0",
+    "react": "16.2.0",
+    "react-dom": "16.2.0",
+    "react-redux": "5.0.7",
+    "redux": "3.7.2"
   }
 }
