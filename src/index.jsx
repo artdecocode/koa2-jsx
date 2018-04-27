@@ -27,15 +27,15 @@ export const prettyRender = (ctx, WebSite) => {
   ctx.body = s
 }
 
-const makeStore = (reducer, actions, View, render = defaultRender) => {
+const makeStore = (reducer, actions, View, render) => {
   return async (ctx, next) => {
     const store = createStore(reducer)
     assignContextActions(actions, ctx, store)
     await next()
 
     // so instead of giving you a function to render to include in middleware
-    // chain, I just include render as the very last operation. assuming no
-    // imlications but can be e.g., for error page
+    // chain, I just include render as the very last operation, assuming no
+    // implications but there could be e.g., for error page.
 
     if (!ctx.Content) {
       return
@@ -66,13 +66,15 @@ export default (config) => {
   const {
     View,
     reducer,
-    render,
+    render = defaultRender,
     actions = {},
-    pretty,
+    pretty = false,
   } = config
 
-  const r = pretty === true ? prettyRender : render
+  const r = pretty == true ? prettyRender : render
 
   const Store = makeStore(reducer, actions, View, r)
   return Store
 }
+
+// export wireframe from './wireframe'

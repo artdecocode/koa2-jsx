@@ -349,9 +349,9 @@ asn1@~0.2.3:
   version "0.2.3"
   resolved "https://registry.yarnpkg.com/asn1/-/asn1-0.2.3.tgz#dac8787713c9966849fc8180777ebe9c1ddf3b86"
 
-assert-diff@1.2.4:
-  version "1.2.4"
-  resolved "https://registry.yarnpkg.com/assert-diff/-/assert-diff-1.2.4.tgz#67d789833ba7c08bebb34d88924210fc073267c9"
+assert-diff@1.2.5:
+  version "1.2.5"
+  resolved "https://registry.yarnpkg.com/assert-diff/-/assert-diff-1.2.5.tgz#2f578de16a2509fee1601eca0afb77ad3fb2c02b"
   dependencies:
     assert-plus "1.0.0"
     json-diff "0.5.2"
@@ -364,9 +364,9 @@ assert-plus@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/assert-plus/-/assert-plus-0.2.0.tgz#d74e1b87e7affc0db8aadb7021f3fe48101ab234"
 
-assert-throws@1.3.0:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/assert-throws/-/assert-throws-1.3.0.tgz#4284911c4cd593ef30a60c130b19e3bd03384be2"
+assert-throws@1.3.1:
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/assert-throws/-/assert-throws-1.3.1.tgz#335e64b8820217a9c37e7477153817b2956bc1c7"
 
 async-each@^1.0.0:
   version "1.0.1"
@@ -455,7 +455,11 @@ caseless@~0.12.0:
   version "0.12.0"
   resolved "https://registry.yarnpkg.com/caseless/-/caseless-0.12.0.tgz#1b681c21ff84033c826543090689420d187151dc"
 
-catchment@1.0.0, catchment@^1.0.0:
+catchment@2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/catchment/-/catchment-2.0.1.tgz#df0a05ac2e1194cf280c2444d5bb564a9cc8f488"
+
+catchment@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/catchment/-/catchment-1.0.0.tgz#3061f71be0102710be84328d2f94363a165f8c4b"
 
@@ -500,9 +504,9 @@ circular-json@^0.3.1:
   version "0.3.3"
   resolved "https://registry.yarnpkg.com/circular-json/-/circular-json-0.3.3.tgz#815c99ea84f6809529d2f45791bdf82711352d66"
 
-clean-stack@1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/clean-stack/-/clean-stack-1.0.0.tgz#fe23f557b57db451abde7f34d66a1ce950a50194"
+clean-stack@1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/clean-stack/-/clean-stack-1.3.0.tgz#9e821501ae979986c46b1d66d2d432db2fd4ae31"
 
 cli-color@~0.1.6:
   version "0.1.7"
@@ -1147,7 +1151,7 @@ home-or-tmp@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/home-or-tmp/-/home-or-tmp-3.0.0.tgz#57a8fe24cf33cdd524860a15821ddc25c86671fb"
 
-html@^1.0.0:
+html@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/html/-/html-1.0.0.tgz#a544fa9ea5492bfb3a2cca8210a10be7b5af1f61"
   dependencies:
@@ -1928,7 +1932,7 @@ rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-dom@^16.2.0:
+react-dom@16.2.0:
   version "16.2.0"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.2.0.tgz#69003178601c0ca19b709b33a83369fe6124c044"
   dependencies:
@@ -1937,7 +1941,7 @@ react-dom@^16.2.0:
     object-assign "^4.1.1"
     prop-types "^15.6.0"
 
-react-redux@^5.0.7:
+react-redux@5.0.7:
   version "5.0.7"
   resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-5.0.7.tgz#0dc1076d9afb4670f993ffaef44b8f8c1155a4c8"
   dependencies:
@@ -1948,7 +1952,7 @@ react-redux@^5.0.7:
     loose-envify "^1.1.0"
     prop-types "^15.6.0"
 
-react@^16.2.0:
+react@16.2.0:
   version "16.2.0"
   resolved "https://registry.yarnpkg.com/react/-/react-16.2.0.tgz#a31bd2dab89bff65d42134fa187f24d054c273ba"
   dependencies:
@@ -1978,7 +1982,7 @@ readdirp@^2.0.0:
     readable-stream "^2.0.2"
     set-immediate-shim "^1.0.1"
 
-redux@^3.7.2:
+redux@3.7.2:
   version "3.7.2"
   resolved "https://registry.yarnpkg.com/redux/-/redux-3.7.2.tgz#06b73123215901d25d065be342eb026bc1c8537b"
   dependencies:
@@ -2403,13 +2407,13 @@ yallist@^2.1.2:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/yallist/-/yallist-2.1.2.tgz#1c11f9218f076089a47dd512f93c6699a6a81d52"
 
-zoroaster@0.5.3:
-  version "0.5.3"
-  resolved "https://registry.yarnpkg.com/zoroaster/-/zoroaster-0.5.3.tgz#5462a59f5a242caf82b64df7bb0fca6f708a2159"
+zoroaster@^1.0.0-beta.2:
+  version "1.0.0-beta.2"
+  resolved "https://registry.yarnpkg.com/zoroaster/-/zoroaster-1.0.0-beta.2.tgz#2bb9165c1a3df11e53b1038aa5b7b3780051bc8c"
   dependencies:
-    assert-diff "1.2.4"
-    assert-throws "1.3.0"
-    catchment "1.0.0"
-    clean-stack "1.0.0"
+    assert-diff "1.2.5"
+    assert-throws "1.3.1"
+    catchment "2.0.1"
+    clean-stack "1.3.0"
     promto "1.0.1"
     spawncommand "1.1.0"

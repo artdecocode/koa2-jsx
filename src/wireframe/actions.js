@@ -41,7 +41,7 @@ const actions = {
    */
   addScript: script => ({
     type: 'ADD_SCRIPT_SOURCES',
-    sources: typeof script === 'string'
+    sources: typeof script == 'string'
       ? [mapScript([script])]
       : script.map(mapScript),
   }),
@@ -50,16 +50,16 @@ const actions = {
 
   addCss: css => ({
     type: 'ADD_CSS',
-    css: typeof css === 'string'
+    css: typeof css == 'string'
       ? [mapCss([css])]
       : css.map(mapCss),
   }),
 
-  addManifest: href => ({ type: 'ADD_LINK', link: { rel: 'manifest', href } }),
+  addManifest: href => ({ type: 'ADD_LINKS', links: [{ rel: 'manifest', href }] }),
   addIcon: icon => ({
     type: 'ADD_LINKS',
-    links: typeof icon === 'string'
-      ? mapIcon([icon])
+    links: typeof icon == 'string'
+      ? [mapIcon([icon])]
       : icon.map(mapIcon),
   }),
 

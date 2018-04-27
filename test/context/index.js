@@ -1,5 +1,4 @@
-async function Context () {
+export default async function Context () {
 
 }
 
-module.exports = Context
