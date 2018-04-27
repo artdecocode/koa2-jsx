@@ -4,11 +4,11 @@
   "description": "A Koa2 middleware to render JSX templates with Redux support",
   "main": "build",
   "scripts": {
-    "test": "zoroaster test/spec",
-    "test-watch": "zoroaster test/spec --watch",
+    "test": "zoroaster build/test/spec",
+    "test:watch": "zoroaster build/test/spec --watch",
     "lint": "eslint .",
-    "build": "babel src --out-dir build",
-    "built": "babel test --out-dir test-build",
+    "build": "babel src --out-dir build/src",
+    "build:test": "babel test --out-dir build/test",
     "example": "node example/require"
   },
   "repository": {
@@ -45,7 +45,7 @@
     "koa": "^2.5.0",
     "koa-static": "^4.0.2",
     "source-map-support": "^0.5.3",
-    "zoroaster": "0.5.3"
+    "zoroaster": "^1.0.0-beta.2"
   },
   "dependencies": {
     "html": "1.0.0",
