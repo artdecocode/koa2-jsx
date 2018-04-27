@@ -237,6 +237,13 @@ viewport and icons. To include it in your application, use:
 import koa2Jsx, { wireframe } from 'koa2-jsx'
 
 const jsx = koa2Jsx(wireframe)
+
+/* or using object destructuring */
+
+const jsx = koa2Jsx({
+  ...wireframe,
+  pretty: true,
+})
 ```
 
 ### Template
