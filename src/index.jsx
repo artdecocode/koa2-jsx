@@ -2,11 +2,9 @@ import { renderToStaticNodeStream, renderToStaticMarkup } from 'react-dom/server
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import { prettyPrint } from 'html'
-import * as wf from './wireframe'
-import b from './bootstrap'
 
-export const wireframe = wf
-export const bootstrap = b
+export { default as wireframe } from './wireframe'
+export { default as bootstrap } from './bootstrap'
 
 const writeDoctype = (ctx) => ctx.res.write('<!doctype html>\n')
 

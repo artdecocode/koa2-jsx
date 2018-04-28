@@ -44,6 +44,7 @@
     "eslint-plugin-react": "^7.7.0",
     "koa": "^2.5.0",
     "koa-static": "^4.0.2",
+    "rqt": "^1.0.1",
     "source-map-support": "^0.5.3",
     "zoroaster": "^1.0.0-beta.2"
   },
