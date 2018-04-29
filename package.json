@@ -11,6 +11,9 @@
     "build:test": "babel test --out-dir build/test",
     "example": "node example/require"
   },
+  "files": [
+    "build"
+  ],
   "repository": {
     "type": "git",
     "url": "git://github.com/artdecocode/koa2-jsx.git"
