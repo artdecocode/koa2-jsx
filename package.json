@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/Sobesednik/koa2-jsx.git"
+    "url": "git://github.com/artdecocode/koa2-jsx.git"
   },
   "keywords": [
     "koa2",
@@ -26,12 +26,12 @@
     "backend",
     "universal"
   ],
-  "author": "Anton <anton@sobes.io>",
+  "author": "Anton <anton@adc.sh>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Sobesednik/koa2-jsx/issues"
+    "url": "https://github.com/artdecocode/koa2-jsx/issues"
   },
-  "homepage": "https://github.com/Sobesednik/koa2-jsx#readme",
+  "homepage": "https://github.com/artdecocode/koa2-jsx#readme",
   "devDependencies": {
     "@babel/cli": "^7.0.0-beta.40",
     "@babel/core": "^7.0.0-beta.40",
