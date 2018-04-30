@@ -5,16 +5,16 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-const mapScript = ([src, integrity, origin]) => ({
+const mapScript = ([src, integrity, crossOrigin]) => ({
   src,
   integrity,
-  origin
+  crossOrigin
 });
 
-const mapCss = ([href, integrity, origin]) => ({
+const mapCss = ([href, integrity, crossOrigin]) => ({
   href,
   integrity,
-  origin,
+  crossOrigin,
   rel: 'stylesheet'
 });
 

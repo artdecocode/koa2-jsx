@@ -1,5 +1,9 @@
 ## 30 April 2018
 
+### 1.0.1
+
+- fix cross-origin and update readme organisation
+
 ### 1.0.0
 
 - Publish to NPM.
