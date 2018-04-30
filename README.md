@@ -350,7 +350,7 @@ ctx.addIcon([
 <link href="/icons/apple-icon-180x180.png" type="image/png" sizes="180x180" rel="apple-touch-icon" />
 ```
 
-### `addScript(src | [[src, integrity, origin]])`
+### `addScript(src | [[src, integrity, crossOrigin]])`
 
 Add a single, or multiple script tags. If integrity and origin need to be used,
 an array must be passed.
@@ -370,10 +370,10 @@ ctx.addScript([
 
 ```html
 <script src="/js/bundle.js"></script>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" origin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 ```
 
-### `addCss(href | [[href, integrity, origin]])`
+### `addCss(href | [[href, integrity, crossOrigin]])`
 
 Add a single, or multiple style links. If integrity and origin need to be
 specified, an array must be passed.
@@ -392,7 +392,7 @@ ctx.addCss([
 ```
 
 ```html
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" origin="anonymous" rel="stylesheet" />
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" rel="stylesheet" />
 <link href="https://fonts.googleapis.com/css?family=Roboto:700&amp;effect=anaglyph|3d-float" rel="stylesheet" />
 ```
 
@@ -532,9 +532,9 @@ instances of components, that is not using `jsx` syntax.
 
 ---
 
-(c) [sobes][1] 2018
+(c) [Art Deco Code][1] 2018
 
-[1]: https://sobes.io
+[1]: https://adc.sh
 [2]: https://idio.cc
 [3]: http://koajs.com
 [4]: https://redux.js.org/recipes/server-rendering

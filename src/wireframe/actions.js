@@ -1,8 +1,8 @@
-const mapScript = ([src, integrity, origin]) => ({
-  src, integrity, origin,
+const mapScript = ([src, integrity, crossOrigin]) => ({
+  src, integrity, crossOrigin,
 })
-const mapCss = ([href, integrity, origin]) => ({
-  href, integrity, origin, rel: 'stylesheet',
+const mapCss = ([href, integrity, crossOrigin]) => ({
+  href, integrity, crossOrigin, rel: 'stylesheet',
 })
 const mapIcon = ([href, type, sizes, rel = 'icon']) => ({
   href, type, sizes, rel,
