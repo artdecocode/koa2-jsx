@@ -30,9 +30,18 @@ export const prettyRender = (ctx, WebSite) => {
   ctx.body = s
 }
 
+/**
+ * A middleware constructor.
+ * @param {function} reducer
+ * @param {object} actions
+ * @param {function} View
+ * @param {function} render
+ * @returns {Koa.Middleware}
+ */
 const makeStore = (reducer, actions, View, render) => {
   return async (ctx, next) => {
     const store = createStore(reducer)
+    ctx.store = store
     assignContextActions(actions, ctx, store)
     await next()
 
@@ -54,7 +63,13 @@ const makeStore = (reducer, actions, View, render) => {
   }
 }
 
-
+/**
+ * Convert action creators from `actions` config into action dispatchers in the
+ * context.
+ * @param {object} actions
+ * @param {object} ctx
+ * @param {{dispatch:function}} store
+ */
 const assignContextActions = (actions, ctx, store) => {
   Object.keys(actions).forEach((key) => {
     const fn = actions[key]
@@ -65,17 +80,31 @@ const assignContextActions = (actions, ctx, store) => {
   })
 }
 
-export default (config) => {
+/**
+ * @typedef {Object} Config
+ * @property {function} View A Redux connected container
+ * @property {function} [reducer] A root reducer to create the store
+ * @property {Object} [actions] A map of action creators
+ * @property {function} [render] An optional render function. Stream rendering
+ * is used by default.
+ */
+
+/**
+ * @param {Config} config
+ */
+const fn = (config = {}) => {
   const {
     View,
-    reducer,
-    render = defaultRender,
+    reducer = () => ({}),
     actions = {},
+    render = defaultRender,
     pretty = false,
   } = config
 
-  const r = pretty == true ? prettyRender : render
+  const r = pretty ? prettyRender : render
 
   const Store = makeStore(reducer, actions, View, r)
   return Store
 }
+
+export default fn
