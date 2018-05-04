@@ -4,11 +4,10 @@
   "description": "A Koa2 middleware to render JSX templates with Redux support",
   "main": "build",
   "scripts": {
-    "test": "zoroaster test/spec",
-    "test:watch": "zoroaster build/test/spec --watch",
+    "test": "zoroaster test/spec --babel",
+    "test:watch": "zoroaster build/test/spec --babel --watch",
     "lint": "eslint .",
-    "build": "babel src --out-dir build/src",
-    "build:test": "babel test --out-dir build/test",
+    "build": "babel src --out-dir build",
     "example": "node example/require"
   },
   "files": [
@@ -36,26 +35,26 @@
   },
   "homepage": "https://github.com/artdecocode/koa2-jsx#readme",
   "devDependencies": {
-    "@babel/cli": "^7.0.0-beta.40",
-    "@babel/core": "^7.0.0-beta.40",
-    "@babel/plugin-proposal-object-rest-spread": "^7.0.0-beta.40",
-    "@babel/plugin-transform-modules-commonjs": "^7.0.0-beta.40",
-    "@babel/preset-react": "^7.0.0-beta.40",
-    "@babel/register": "^7.0.0-beta.40",
-    "babel-plugin-react-require": "^3.0.0",
-    "eslint": "^4.18.2",
-    "eslint-plugin-react": "^7.7.0",
-    "koa": "^2.5.0",
-    "koa-static": "^4.0.2",
-    "rqt": "^1.0.1",
-    "source-map-support": "^0.5.3",
-    "zoroaster": "^1.0.0-beta.2"
+    "@babel/cli": "7.0.0-beta.46",
+    "@babel/core": "7.0.0-beta.46",
+    "@babel/plugin-proposal-object-rest-spread": "7.0.0-beta.46",
+    "@babel/plugin-transform-modules-commonjs": "7.0.0-beta.46",
+    "@babel/preset-react": "7.0.0-beta.46",
+    "@babel/register": "7.0.0-beta.46",
+    "babel-plugin-react-require": "3.0.0",
+    "eslint": "4.19.1",
+    "eslint-plugin-react": "7.7.0",
+    "koa": "2.5.1",
+    "koa-static": "4.0.2",
+    "rqt": "1.1.0",
+    "source-map-support": "0.5.5",
+    "zoroaster": "1.1.0"
   },
   "dependencies": {
     "html": "1.0.0",
-    "react": "16.2.0",
-    "react-dom": "16.2.0",
+    "react": "16.3.2",
+    "react-dom": "16.3.2",
     "react-redux": "5.0.7",
-    "redux": "3.7.2"
+    "redux": "4.0.0"
   }
 }
