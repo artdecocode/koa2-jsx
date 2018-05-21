@@ -2,11 +2,11 @@ import { equal, deepEqual } from 'zoroaster/assert'
 import context from '../context'
 import koa2Jsx from '../../src'
 
-const View = ({ children }) => <div><children /></div>
+const View = ({ children }) => <div>{children}</div>
 
 export default {
   context,
-  'should be a function'() {
+  'is a function'() {
     equal(typeof koa2Jsx, 'function')
   },
   async 'does not call render if content is not set'() {

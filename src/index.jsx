@@ -1,4 +1,4 @@
-import { renderToStaticNodeStream, renderToStaticMarkup } from 'react-dom/server'
+import { renderToStaticNodeStream, renderToStaticMarkup, renderToNodeStream } from 'react-dom/server'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import { prettyPrint } from 'html'
@@ -14,9 +14,14 @@ const writeHtml = (ctx) => {
   writeDoctype(ctx)
 }
 
-const defaultRender = (ctx, WebSite) => {
+const staticNodeStreamRender = (ctx, WebSite) => {
   writeHtml(ctx)
   const stream = renderToStaticNodeStream(WebSite)
+  ctx.body = stream
+}
+export const nodeStreamRender = (ctx, WebSite) => {
+  writeHtml(ctx)
+  const stream = renderToNodeStream(WebSite)
   ctx.body = stream
 }
 
@@ -97,7 +102,7 @@ const fn = (config = {}) => {
     View,
     reducer = () => ({}),
     actions = {},
-    render = defaultRender,
+    render = staticNodeStreamRender,
     pretty = false,
   } = config
 

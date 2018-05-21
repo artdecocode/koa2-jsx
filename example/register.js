@@ -1,6 +1,2 @@
-const reg = require('@babel/register')
-reg({
-  cache: false,
-})
-
+require('@babel/register')
 require('.')

@@ -11,6 +11,23 @@
       "program": "${workspaceFolder}/example/register.js",
       "sourceMaps": true,
       "console": "integratedTerminal"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Launch Zoroaster",
+      "program": "${workspaceFolder}/node_modules/.bin/zoroaster",
+      "args": [
+        "test/spec/render/nodeStream.jsx",
+        "--babel"
+      ],
+      "env": {
+        "ZOROASTER_TIMEOUT": "9999999"
+      },
+      "console": "integratedTerminal",
+      "skipFiles": [
+        "<node_internals>/**/*.js"
+      ]
     }
   ]
 }

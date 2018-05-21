@@ -186,9 +186,7 @@ export default actions
 
 ### render
 
-It is possible to pass a custom render function. It accepts Koa's context and
-the container to render. For example, a prettified HTML render looks like the
-following:
+It is possible to pass a custom render function. It accepts Koa's context and the container to render. For example, a prettified HTML render implementation looks like the following:
 
 ```js
 import { renderToStaticMarkup } from 'react-dom/server'
@@ -217,21 +215,55 @@ const defaultRender = (ctx, WebSite) => {
 }
 ```
 
-You must implement your own render for more complex scenarios. It accepts
-a `WebSite` which is a View container wrapper in a state provider.
+You must implement your own render for more complex scenarios. It accepts a `WebSite` which is a `View` container wrapper in a state provider.
+
+### staticNodeStreamRender
+
+This default render will transmit the website as a stream without any react data required for hydration. Useful when not using react client-side.
+
+#### nodeStreamRender
+
+This will render website as a stream with additional react data required for hydration.
+
+```js
+import koa2Jsx, { nodeStreamRender } from 'koa2-jsx'
+
+const jsx = koa2Jsx({
+  render: nodeStreamRender,
+})
+```
+
+#### nodeStreamRender
+
+This will render website as a stream with additional react data required for hydration.
+
+```js
+import koa2Jsx, { nodeStreamRender } from 'koa2-jsx'
+
+const jsx = koa2Jsx({
+  render: nodeStreamRender,
+})
+```
+
+#### prettyRender
+
+This will render website as a prettified HTML, however no streaming is supported. Will be used if `pretty` option is set to true.
+
+```js
+import koa2Jsx, { prettyRender } from 'koa2-jsx'
+
+const jsx = koa2Jsx({
+  render: prettyRender,
+})
+```
 
 ### pretty
 
-When `pretty` config property is set to `true`, HTML will be indented using
-`html` package. Bear in mind, that serving of pages will be slower, as it is
-not done as a stream, but requires to write all HTML into a string first to
-format it.
+When `pretty` config property is set to `true`, HTML will be indented using `html` package. Bear in mind, that serving of pages will be slower, as it is not done as a stream, but requires to write all HTML into a string first to format it.
 
 ## Wireframe
 
-The wireframe provides a `reducer`, `actions` and `View` to be used when
-creating web pages. It accounts for most common use cases, such as assigning
-viewport and icons. To include it in your application, use:
+The wireframe provides a `reducer`, `actions` and `View` to be used when creating web pages. It accounts for most common use cases, such as assigning viewport and icons. To include it in your application, use:
 
 ```js
 import koa2Jsx, { wireframe } from 'koa2-jsx'
