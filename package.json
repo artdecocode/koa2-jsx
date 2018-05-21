@@ -7,8 +7,8 @@
     "test": "zoroaster test/spec --babel",
     "test:watch": "zoroaster build/test/spec --babel --watch",
     "lint": "eslint .",
-    "build": "babel src --out-dir build",
-    "example": "node example/require"
+    "build": "babel src --out-dir build --source-maps",
+    "example/": "node example/register"
   },
   "files": [
     "build"
@@ -42,6 +42,7 @@
     "@babel/preset-react": "7.0.0-beta.47",
     "@babel/register": "7.0.0-beta.47",
     "babel-plugin-react-require": "3.0.0",
+    "babel-plugin-transform-rename-import": "2.2.0",
     "eslint": "4.19.1",
     "eslint-config-artdeco": "1.0.0",
     "eslint-plugin-react": "7.8.2",

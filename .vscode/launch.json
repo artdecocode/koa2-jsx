@@ -8,7 +8,9 @@
       "type": "node",
       "request": "launch",
       "name": "Launch Example",
-      "program": "${workspaceFolder}/example/require.js"
+      "program": "${workspaceFolder}/example/register.js",
+      "sourceMaps": true,
+      "console": "integratedTerminal"
     }
   ]
 }

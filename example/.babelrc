@@ -1,0 +1,12 @@
+{
+  "extends": "../.babelrc",
+  "plugins": [
+    [
+      "transform-rename-import",
+      {
+        "original": "koa2-jsx",
+        "replacement": "../src"
+      }
+    ]
+  ]
+}

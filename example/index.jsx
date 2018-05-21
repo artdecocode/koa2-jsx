@@ -1,7 +1,7 @@
 import Koa from 'koa'
 import serve from 'koa-static'
 import { resolve } from 'path'
-import koa2Jsx, { wireframe, bootstrap, prettyRender } from '..'
+import koa2Jsx, { wireframe, bootstrap, prettyRender } from 'koa2-jsx'
 
 const jsx = koa2Jsx({
   ...wireframe,
