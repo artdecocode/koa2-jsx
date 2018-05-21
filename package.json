@@ -6,7 +6,7 @@
   "scripts": {
     "t": "zoroaster --babel",
     "test": "zoroaster test/spec --babel",
-    "test:watch": "zoroaster build/test/spec --babel --watch",
+    "test-watch": "zoroaster build/test/spec --babel --watch",
     "lint": "eslint .",
     "build": "babel src --out-dir build --source-maps",
     "example/": "node example/register"
