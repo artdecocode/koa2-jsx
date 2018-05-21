@@ -1,3 +1,10 @@
+## 21 May 2018
+
+### 1.1.0
+
+- [feature] export `nodeStreamRender` as a render.
+- [tests] snapshot testing.
+
 ## 30 April 2018
 
 ### 1.0.1
