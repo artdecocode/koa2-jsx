@@ -19,3 +19,4 @@ var _default = {
   View: _View.default
 };
 exports.default = _default;
+//# sourceMappingURL=index.js.map

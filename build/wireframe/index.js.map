@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../src/wireframe/index.js"],"names":["actions","reducer","View"],"mappings":";;;;;;;AAAA;;AACA;;AACA;;;;eAEe;AAAEA,2BAAF;AAAWC,2BAAX;AAAoBC;AAApB,C","sourcesContent":["import actions from './actions'\nimport reducer from './reducer'\nimport View from './Containers/View'\n\nexport default { actions, reducer, View }\n"],"file":"index.js"}

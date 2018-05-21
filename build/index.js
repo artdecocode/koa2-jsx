@@ -15,7 +15,7 @@ Object.defineProperty(exports, "bootstrap", {
     return _bootstrap.default;
   }
 });
-exports.default = exports.prettyRender = void 0;
+exports.default = exports.prettyRender = exports.nodeStreamRender = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -41,15 +41,23 @@ const writeHtml = ctx => {
   writeDoctype(ctx);
 };
 
-const defaultRender = (ctx, WebSite) => {
+const staticNodeStreamRender = (ctx, WebSite) => {
   writeHtml(ctx);
   const stream = (0, _server.renderToStaticNodeStream)(WebSite);
+  ctx.body = stream;
+};
+
+const nodeStreamRender = (ctx, WebSite) => {
+  writeHtml(ctx);
+  const stream = (0, _server.renderToNodeStream)(WebSite);
   ctx.body = stream;
 };
 /**
  * Render html with indentation.
  */
 
+
+exports.nodeStreamRender = nodeStreamRender;
 
 const prettyRender = (ctx, WebSite) => {
   writeHtml(ctx);
@@ -127,7 +135,7 @@ const fn = (config = {}) => {
     View,
     reducer = () => ({}),
     actions = {},
-    render = defaultRender,
+    render = staticNodeStreamRender,
     pretty = false
   } = config;
   const r = pretty ? prettyRender : render;
@@ -137,3 +145,4 @@ const fn = (config = {}) => {
 
 var _default = fn;
 exports.default = _default;
+//# sourceMappingURL=index.js.map
