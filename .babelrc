@@ -2,7 +2,7 @@
   "plugins": [
     "react-require",
     "@babel/plugin-syntax-object-rest-spread",
-    "@babel/plugin-proposal-object-rest-spread"
+    "@babel/plugin-transform-modules-commonjs"
   ],
   "presets": [
     "@babel/preset-react"

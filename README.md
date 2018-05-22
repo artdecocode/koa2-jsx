@@ -1,5 +1,7 @@
 # koa2-jsx
 
+[![npm version](https://badge.fury.io/js/koa2-jsx.svg)](https://badge.fury.io/js/koa2-jsx)
+
 ```bash
 yarn add koa2jsx
 ```
@@ -476,7 +478,7 @@ To build JSX code, you can use the following `.babelrc` snippet:
   "plugins": [
     "react-require",
     "@babel/plugin-syntax-object-rest-spread",
-    "@babel/plugin-proposal-object-rest-spread"
+    "@babel/plugin-transform-modules-commonjs"
   ],
   "presets": [
     "@babel/preset-react"
