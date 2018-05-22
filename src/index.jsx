@@ -1,4 +1,4 @@
-import { renderToStaticNodeStream, renderToStaticMarkup, renderToNodeStream } from 'react-dom/server'
+import { renderToStaticNodeStream, renderToNodeStream, renderToStaticMarkup, renderToString } from 'react-dom/server'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import { prettyPrint } from 'html'
@@ -14,19 +14,17 @@ const writeHtml = (ctx) => {
   writeDoctype(ctx)
 }
 
-const staticNodeStreamRender = (ctx, WebSite) => {
-  writeHtml(ctx)
-  const stream = renderToStaticNodeStream(WebSite)
-  ctx.body = stream
-}
-export const nodeStreamRender = (ctx, WebSite) => {
-  writeHtml(ctx)
-  const stream = renderToNodeStream(WebSite)
-  ctx.body = stream
+const makeStreamRender = (_static) => {
+  const render = _static ? renderToStaticNodeStream : renderToNodeStream
+  return (ctx, WebSite) => {
+    writeHtml(ctx)
+    const stream = render(WebSite)
+    ctx.body = stream
+  }
 }
 
 /**
- * Render html with indentation.
+ * Render html with indentation (with static node stream render)
  */
 export const prettyRender = (ctx, WebSite) => {
   writeHtml(ctx)
@@ -87,12 +85,28 @@ const assignContextActions = (actions, ctx, store) => {
 
 /**
  * @typedef {Object} Config
- * @property {function} View A Redux connected container
- * @property {function} [reducer] A root reducer to create the store
- * @property {Object} [actions] A map of action creators
- * @property {function} [render] An optional render function. Stream rendering
- * is used by default.
+ * @property {function} View A Redux connected container.
+ * @property {function} [reducer] A root reducer to create the store.
+ * @property {Object} [actions] A map of action creators.
+ * @property {boolean} [static=true] String React's hydration metadata (default true)
+ * @property {boolean} [pretty=false] Render formatted HTML (default false)
+ * @property {(ctx, Website) => void} [render] An optional render function for more control in rendering.
  */
+
+const makeMarkupRender = (_static, pretty) => {
+  const render = _static ? renderToStaticMarkup : renderToString
+  return (ctx, WebSite) => {
+    writeHtml(ctx)
+    const m = render(WebSite)
+    const s = pretty ? prettyPrint(m) : m
+    ctx.body = s
+  }
+}
+
+const getRender = (_static, pretty) => {
+  if (pretty) return makeMarkupRender(_static, pretty)
+  return makeStreamRender(_static)
+}
 
 /**
  * @param {Config} config
@@ -102,11 +116,12 @@ const fn = (config = {}) => {
     View,
     reducer = () => ({}),
     actions = {},
-    render = staticNodeStreamRender,
+    static: _static = true,
     pretty = false,
+    render = null,
   } = config
 
-  const r = pretty ? prettyRender : render
+  const r = render || getRender(_static, pretty)
 
   const Store = makeStore(reducer, actions, View, r)
   return Store

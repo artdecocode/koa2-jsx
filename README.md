@@ -4,35 +4,22 @@
 yarn add koa2jsx
 ```
 
-`koa2-jsx` is a piece of _middleware_ for [`Koa2`][3] which provides support for
-rendering JSX in a server application via `react-dom/server`. It also uses
-`Redux` to create a store updatable with actions for a better control of what
-data needs to be rendered, for example, it is possible to create a reducer with
-`title` slice, and an action to set that property from `ctx`, and then print
-`{ title }` in the template.
+`koa2-jsx` is _middleware_ for [`Koa2`][3] which provides support for rendering JSX in a server application via `react-dom/server`. It also uses `Redux` to create a store updatable with actions for a better control of what data needs to be rendered, for example, it is possible to create a reducer with a `title` slice, and an action to set that property from `ctx`, and then print `{ title }` in the JSX template.
 
-In addition to the core functionality, the package provides a minimum wireframe
-View container and actions to set page title and viewport, add external and
-inline scripts and styles, icons and a link to the manifest file.
+In addition to the core functionality, the package gives a minimum wireframe `View` container and actions to set page title and viewport, add external and inline scripts and styles, icons and a link to the manifest file.
 
-Finally, there's an extra middleware function which can be used after
-`koa2-jsx` and wireframe actions were installed to include links to
-`Bootstrap 4` scripts (including jQuery) and CSS.
+Finally, there's an extra middleware function which can be used after `koa2-jsx` and wireframe actions were installed to include links to `Bootstrap 4` scripts (including jQuery) and CSS.
 
 ## API
 
-The module will return a single middleware function which accepts 3 arguments:
-`reducer`, `View` and `actions`. They are describe below in the
-[_Example section_](#example).
+The module will return a single middleware function which accepts 3 arguments: `reducer`, `View` and `actions`. They are describe below in the [_Example section_](#example).
 
 The middleware function will perform the following for each request:
 
 1. Initialise the Redux store by creating a **reducer**;
-1. assign **actions** to the context, such as `{ setTitle(title) }` becomes
-`ctx.setTitle`;
+1. assign **actions** to the context, such as `{ setTitle(title) }` becomes `ctx.setTitle`;
 1. wait for all other middleware and pages to resolve; _and_
-1. render `ctx.Content` if found using `react-dom/server` as a stream with
-doctype html sent, using the **View**.
+1. render `ctx.Content` if found using `react-dom/server` as a stream with doctype html sent, using the **View**.
 
 ```jsx
 import Koa from 'koa2'
@@ -58,7 +45,7 @@ const View = ({ title, children }) => {
 const jsx = koa2Jsx({
   reducer: combineReducers({
     title(state = null, { type, title }) {
-      if (type !== 'SET_TITLE') return state
+      if (type != 'SET_TITLE') return state
       return title
     }
   })
@@ -84,10 +71,9 @@ If `ctx.Content` is set in downstream application middleware, `<!doctype html>`
 is written and a readable stream from React Dom's
 `renderToStaticNodeStream(<WebPage />)` is be piped into `ctx.body`.
 
-### `koa2Jsx({`<br/>&nbsp;&nbsp;`reducer: function,`<br/>&nbsp;&nbsp;`View: Container,`<br/>&nbsp;&nbsp;`actions: object,`<br/>&nbsp;&nbsp;`render?: function,`<br/>&nbsp;&nbsp;`pretty = false: boolean,`<br/>`}): function`
+### `koa2Jsx({`<br/>&nbsp;&nbsp;`reducer: function,`<br/>&nbsp;&nbsp;`View: Container,`<br/>&nbsp;&nbsp;`actions: object,`<br/>&nbsp;&nbsp;`static?: boolean = true,`<br/>&nbsp;&nbsp;`render?: function,`<br/>`}): function`
 
-This will set up the middleware function and return it. Add it as a usual Koa2
-middleware (shown below).
+This will set up the middleware function and return it. Add it as a usual `Koa2` middleware (shown below).
 
 ### Example
 
@@ -95,9 +81,7 @@ The example shows how to create a reducer, actions and View for a minimum HTML
 template.
 
 ```js
-// Checkout ./example/index.jsx for a fuller example.
-// Run yarn example to start the demo server.
-
+/* yarn example/ */
 import Koa from 'koa2'
 import koa2Jsx from 'koa2-jsx'
 import actions from './actions'
@@ -110,7 +94,10 @@ const jsx = koa2Jsx({
   reducer,
   View,
   actions,
-  pretty: false, // set to true for prettified HTML output
+  static: true,
+  // ^ set to false for universal applications
+  pretty: false,
+  // ^ set to true for prettified HTML output
 })
 
 app.use(jsx, async (ctx, next) => {
@@ -122,18 +109,13 @@ app.use(jsx, async (ctx, next) => {
 
 ### reducer
 
-The reducer is either a simple function or a combination of reducers created
-with `combineReducers` from the `redux` package. The reducer is used
-during initialisation of the middleware to create a _store_ with
-`createStore(reducer)`. The _store_ is used in rendering as context for the
-_View_ container. This way, we pass data to the template by invoking methods on
-the Koa's context (see actions).
+The reducer is either a simple function or a combination of reducers created with `combineReducers` from the `redux` package. The reducer is used during the initialisation of the middleware to create a _store_ with `createStore(reducer)`. The _store_ is used in rendering as a context for the _View_ container. This way, it's possible to pass data to the template by invoking methods on the Koa's context (see actions).
 
 ```js
 import { combineReducers } from 'redux'
 
 const title = (state = null, { type, title }) => {
-  if (type !== 'SET_TITLE') return state
+  if (type != 'SET_TITLE') return state
   return title
 }
 
@@ -144,11 +126,7 @@ export default combineReducers({
 
 ### View
 
-The view can be a connected `react-redux` component when actions and a reducer
-are used, or a pure `React` component when they're omitted. It follows the
-same principles as when developing for a browser-side `react-redux` application,
-so that it accepts the state of the reducer as the first argument, with
-`children` property (set with `ctx.Content`).
+The view can be a connected `react-redux` component when actions and a reducer are used, or a pure `React` component when they're omitted. It follows the same principles as when developing for a browser-side `react-redux` application, so that it accepts the state of the reducer as the first argument, with `children` property (set to `ctx.Content`).
 
 ```js
 import { connect } from 'react-redux'
@@ -177,19 +155,52 @@ template.
 
 ```js
 const actions = {
-  // exported as ctx.setTitle()
   setTitle: title => ({ type: 'SET_TITLE', title }),
+  // ^ exported as ctx.setTitle(title)
 }
 
 export default actions
 ```
 
-### render
+### `static: bool = true`
 
-It is possible to pass a custom render function. It accepts Koa's context and the container to render. For example, a prettified HTML render implementation looks like the following:
+Whether to use static rendering, i.e., without React's metadata required for hydration on the client-side. Set to `false` when building universal applications.
+
+Results with static:
+
+```html
+<div class="container"><div class="row"><div class="col">test</div></div></div>
+```
+
+and without static:
+
+```html
+<div class="container" data-reactroot=""><div class="row"><div class="col">test</div></div></div>
+```
+
+### `pretty: bool = false`
+
+Prettify HTML output. This will use string rendering to get HTML before formatting, therefore it's slower to display a page.
+
+```html
+<div class="container" data-reactroot="">
+    <div class="row">
+        <div class="col">
+            <p>Test</p>
+        </div>
+    </div>
+</div>
+```
+
+### `render: function(ctx: Koa.Context, WebSite: React.Component)`
+
+It is possible to pass a custom render function. You should implement your own render for more control when needed. It accepts a Koa's context and a `WebSite` arguments. The `WebSite` is a `View` container wrapped in a state provider.
+
+Examples below show how you can implement (a) markup renderer:
 
 ```js
 import { renderToStaticMarkup } from 'react-dom/server'
+import { prettyPrint } from 'html'
 
 const render = (ctx, WebSite) => {
   ctx.type = 'html'
@@ -201,12 +212,12 @@ const render = (ctx, WebSite) => {
 }
 ```
 
-and the default stream render:
+(b) stream renderer:
 
 ```js
 import { renderToStaticNodeStream } from 'react-dom/server'
 
-const defaultRender = (ctx, WebSite) => {
+const streamRender = (ctx, WebSite) => {
   ctx.type = 'html'
   ctx.status = 200
   ctx.res.write('<!doctype html>\n')
@@ -214,52 +225,6 @@ const defaultRender = (ctx, WebSite) => {
   ctx.body = stream
 }
 ```
-
-You must implement your own render for more complex scenarios. It accepts a `WebSite` which is a `View` container wrapper in a state provider.
-
-### staticNodeStreamRender
-
-This default render will transmit the website as a stream without any react data required for hydration. Useful when not using react client-side.
-
-#### nodeStreamRender
-
-This will render website as a stream with additional react data required for hydration.
-
-```js
-import koa2Jsx, { nodeStreamRender } from 'koa2-jsx'
-
-const jsx = koa2Jsx({
-  render: nodeStreamRender,
-})
-```
-
-#### nodeStreamRender
-
-This will render website as a stream with additional react data required for hydration.
-
-```js
-import koa2Jsx, { nodeStreamRender } from 'koa2-jsx'
-
-const jsx = koa2Jsx({
-  render: nodeStreamRender,
-})
-```
-
-#### prettyRender
-
-This will render website as a prettified HTML, however no streaming is supported. Will be used if `pretty` option is set to true.
-
-```js
-import koa2Jsx, { prettyRender } from 'koa2-jsx'
-
-const jsx = koa2Jsx({
-  render: prettyRender,
-})
-```
-
-### pretty
-
-When `pretty` config property is set to `true`, HTML will be indented using `html` package. Bear in mind, that serving of pages will be slower, as it is not done as a stream, but requires to write all HTML into a string first to format it.
 
 ## Wireframe
 
@@ -392,7 +357,7 @@ ctx.addScript('/js/bundle.js')
 ctx.addScript([
   [
     'https://code.jquery.com/jquery-3.2.1.slim.min.js',
-    ...(process.env.NODE_ENV === 'production' ? [
+    ...(process.env.NODE_ENV == 'production' ? [
       'sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN',
       'anonymous',
     ] : []),
@@ -415,7 +380,7 @@ ctx.addCss('https://fonts.googleapis.com/css?family=Roboto:700&effect=anaglyph|3
 ctx.addCss([
   [
     'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css',
-    ...(process.env.NODE_ENV === 'production' ? [
+    ...(process.env.NODE_ENV == 'production' ? [
       'sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm',
       'anonymous',
     ] : []),
@@ -458,8 +423,7 @@ ctx.addJs('$(".alert").alert()')
 
 ## Bootstrap
 
-To include the full `Bootstrap 4` support to an HTML page, use the
-following snippet:
+To include the full `Bootstrap 4` support to an HTML page, use the following snippet:
 
 ```js
 import koa2Jsx, { bootstrap, wireframe } from 'koa2-jsx'
@@ -484,7 +448,6 @@ app.use(bootstrap)
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" origin="anonymous"></script>
 ```
 
-
 ## Babel
 
 To start using `koa2-jsx`, you really need to be able to write `JSX` syntax.
@@ -504,7 +467,7 @@ require('@babel/register')
 require('.')
 ```
 
-### babelrc
+### .babelrc
 
 To build JSX code, you can use the following `.babelrc` snippet:
 
@@ -512,7 +475,7 @@ To build JSX code, you can use the following `.babelrc` snippet:
 {
   "plugins": [
     "react-require",
-    "@babel/plugin-transform-modules-commonjs",
+    "@babel/plugin-syntax-object-rest-spread",
     "@babel/plugin-proposal-object-rest-spread"
   ],
   "presets": [
@@ -520,9 +483,6 @@ To build JSX code, you can use the following `.babelrc` snippet:
   ]
 }
 ```
-
-> _Although using `object-rest-spread` in Node.JS is not required, here it is included to satisfy `babel`._
-
 
 <!-- ## Project structure
 

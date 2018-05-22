@@ -1,12 +1,11 @@
 import Koa from 'koa'
 import serve from 'koa-static'
 import { resolve } from 'path'
-import koa2Jsx, { wireframe, bootstrap, prettyRender } from 'koa2-jsx'
+import koa2Jsx, { wireframe, bootstrap } from 'koa2-jsx'
 
 const jsx = koa2Jsx({
   ...wireframe,
-  render: prettyRender, // or,
-  pretty: true,
+  // pretty: true, <-- enables formatting HTML
 })
 
 const app = new Koa()
