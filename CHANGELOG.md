@@ -1,4 +1,8 @@
-## 21 May 2018
+## 22 May 2018
+
+### 1.2.0
+
+- [API] `static` property for `staticNodeStreamRender`.
 
 ### 1.1.0
 
