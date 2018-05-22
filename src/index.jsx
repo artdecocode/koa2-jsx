@@ -24,16 +24,6 @@ const makeStreamRender = (_static) => {
 }
 
 /**
- * Render html with indentation (with static node stream render)
- */
-export const prettyRender = (ctx, WebSite) => {
-  writeHtml(ctx)
-  const markup = renderToStaticMarkup(WebSite)
-  const s = prettyPrint(markup)
-  ctx.body = s
-}
-
-/**
  * A middleware constructor.
  * @param {function} reducer
  * @param {object} actions

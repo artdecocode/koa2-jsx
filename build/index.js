@@ -15,7 +15,7 @@ Object.defineProperty(exports, "bootstrap", {
     return _bootstrap.default;
   }
 });
-exports.default = exports.prettyRender = exports.nodeStreamRender = void 0;
+exports.default = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -41,29 +41,13 @@ const writeHtml = ctx => {
   writeDoctype(ctx);
 };
 
-const staticNodeStreamRender = (ctx, WebSite) => {
-  writeHtml(ctx);
-  const stream = (0, _server.renderToStaticNodeStream)(WebSite);
-  ctx.body = stream;
-};
-
-const nodeStreamRender = (ctx, WebSite) => {
-  writeHtml(ctx);
-  const stream = (0, _server.renderToNodeStream)(WebSite);
-  ctx.body = stream;
-};
-/**
- * Render html with indentation.
- */
-
-
-exports.nodeStreamRender = nodeStreamRender;
-
-const prettyRender = (ctx, WebSite) => {
-  writeHtml(ctx);
-  const markup = (0, _server.renderToStaticMarkup)(WebSite);
-  const s = (0, _html.prettyPrint)(markup);
-  ctx.body = s;
+const makeStreamRender = _static => {
+  const render = _static ? _server.renderToStaticNodeStream : _server.renderToNodeStream;
+  return (ctx, WebSite) => {
+    writeHtml(ctx);
+    const stream = render(WebSite);
+    ctx.body = stream;
+  };
 };
 /**
  * A middleware constructor.
@@ -74,8 +58,6 @@ const prettyRender = (ctx, WebSite) => {
  * @returns {Koa.Middleware}
  */
 
-
-exports.prettyRender = prettyRender;
 
 const makeStore = (reducer, actions, View, render) => {
   return async (ctx, next) => {
@@ -118,13 +100,29 @@ const assignContextActions = (actions, ctx, store) => {
 };
 /**
  * @typedef {Object} Config
- * @property {function} View A Redux connected container
- * @property {function} [reducer] A root reducer to create the store
- * @property {Object} [actions] A map of action creators
- * @property {function} [render] An optional render function. Stream rendering
- * is used by default.
+ * @property {function} View A Redux connected container.
+ * @property {function} [reducer] A root reducer to create the store.
+ * @property {Object} [actions] A map of action creators.
+ * @property {boolean} [static=true] String React's hydration metadata (default true)
+ * @property {boolean} [pretty=false] Render formatted HTML (default false)
+ * @property {(ctx, Website) => void} [render] An optional render function for more control in rendering.
  */
 
+
+const makeMarkupRender = (_static, pretty) => {
+  const render = _static ? _server.renderToStaticMarkup : _server.renderToString;
+  return (ctx, WebSite) => {
+    writeHtml(ctx);
+    const m = render(WebSite);
+    const s = pretty ? (0, _html.prettyPrint)(m) : m;
+    ctx.body = s;
+  };
+};
+
+const getRender = (_static, pretty) => {
+  if (pretty) return makeMarkupRender(_static, pretty);
+  return makeStreamRender(_static);
+};
 /**
  * @param {Config} config
  */
@@ -135,10 +133,11 @@ const fn = (config = {}) => {
     View,
     reducer = () => ({}),
     actions = {},
-    render = staticNodeStreamRender,
-    pretty = false
+    static: _static = true,
+    pretty = false,
+    render = null
   } = config;
-  const r = pretty ? prettyRender : render;
+  const r = render || getRender(_static, pretty);
   const Store = makeStore(reducer, actions, View, r);
   return Store;
 };
